@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Admin - Detalle del Pedido</title>
+
+    <!-- Custom fonts for this template-->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet" type="text/css">
+    <link
+        href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
+        rel="stylesheet">
+
+    <!-- Custom styles for this template-->
+    <link href="css/sb-admin-2.min.css" rel="stylesheet">
+
+    <style>
+        .product-image {
+            width: 60px;
+            height: 60px;
+            object-fit: cover;
+            border-radius: 4px;
+        }
+        .total-box {
+            background-color: #f8f9fc;
+            border-radius: 8px;
+            padding: 20px;
+            border-left: 4px solid #4e73df;
+        }
+    </style>
+</head>
+
+<body id="page-top">
+
+    <!-- Page Wrapper -->
+    <div id="wrapper">
+
+        <!-- Sidebar -->
+        <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
+            <!-- ... tu sidebar ... -->
+        </ul>
+
+        <!-- Content Wrapper -->
+        <div id="content-wrapper" class="d-flex flex-column">
+
+            <!-- Main Content -->
+            <div id="content">
+
+                <!-- Topbar -->
+                <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
+                    <!-- ... tu topbar ... -->
+                </nav>
+
+                <!-- Begin Page Content -->
+                <div class="container-fluid">
+
+                    <!-- Page Heading -->
+                    <div class="d-sm-flex align-items-center justify-content-between mb-4">
+                        <h1 class="h3 mb-0 text-gray-800">Detalle del Pedido <span id="pedido-id"></span></h1>
+                        <div>
+                            <a href="listado-pedidos.html" class="btn btn-sm btn-secondary shadow-sm">
+                                <i class="fas fa-arrow-left fa-sm text-white-50"></i> Volver
+                            </a>
+                            <button id="btn-cambiar-estado" class="btn btn-sm btn-warning shadow-sm">
+                                <i class="fas fa-sync-alt fa-sm text-white-50"></i> Cambiar Estado
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Información del Cliente -->
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <div class="card shadow mb-4">
+                                <div class="card-header py-3">
+                                    <h6 class="m-0 font-weight-bold text-primary">Información del Cliente</h6>
+                                </div>
+                                <div class="card-body" id="info-cliente">
+                                    <p class="mb-1"><strong>Nombre:</strong> <span id="cliente-nombre"></span></p>
+                                    <p class="mb-1"><strong>Email:</strong> <span id="cliente-email"></span></p>
+                                    <p class="mb-1"><strong>Celular:</strong> <span id="cliente-celular"></span></p>
+                                    <p class="mb-1"><strong>Dirección:</strong> <span id="cliente-direccion"></span></p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-6">
+                            <div class="card shadow mb-4">
+                                <div class="card-header py-3">
+                                    <h6 class="m-0 font-weight-bold text-primary">Información del Pedido</h6>
+                                </div>
+                                <div class="card-body" id="info-pedido">
+                                    <p class="mb-1"><strong>Fecha:</strong> <span id="pedido-fecha"></span></p>
+                                    <p class="mb-1"><strong>Método de Pago:</strong> <span id="pedido-metodo-pago"></span></p>
+                                    <p class="mb-1">
+                                        <strong>Estado:</strong> 
+                                        <span id="pedido-estado" class="badge badge-pill"></span>
+                                    </p>
+                                    <p class="mb-1"><strong>Descuento:</strong> <span id="pedido-descuento"></span></p>
+                                    <p class="mb-1"><strong>Aumento/Envío:</strong> <span id="pedido-aumento"></span></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Detalle de Productos -->
+                    <div class="card shadow mb-4">
+                        <div class="card-header py-3">
+                            <h6 class="m-0 font-weight-bold text-primary">Productos del Pedido</h6>
+                        </div>
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <table class="table table-bordered" id="tabla-productos" width="100%" cellspacing="0">
+                                    <thead>
+                                        <tr>
+                                            <th>Imagen</th>
+                                            <th>Producto</th>
+                                            <th>Precio Unit.</th>
+                                            <th>Cantidad</th>
+                                            <th>Subtotal</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="detalle-productos">
+                                        <tr><td colspan="5" class="text-center">Cargando productos...</td></tr>
+                                    </tbody>
+                                </table>
+                            </div>
+
+                            <!-- Total -->
+                            <div class="row">
+                                <div class="col-md-6 offset-md-6">
+                                    <div class="total-box">
+                                        <h5 class="font-weight-bold">Resumen</h5>
+                                        <hr>
+                                        <div class="d-flex justify-content-between mb-2">
+                                            <span>Subtotal:</span>
+                                            <span id="resumen-subtotal">$0</span>
+                                        </div>
+                                        <div class="d-flex justify-content-between mb-2">
+                                            <span>Descuento:</span>
+                                            <span id="resumen-descuento">$0</span>
+                                        </div>
+                                        <div class="d-flex justify-content-between mb-2">
+                                            <span>Aumento/Envío:</span>
+                                            <span id="resumen-aumento">$0</span>
+                                        </div>
+                                        <hr>
+                                        <div class="d-flex justify-content-between font-weight-bold">
+                                            <span>TOTAL:</span>
+                                            <span id="resumen-total">$0</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <!-- /.container-fluid -->
+
+            </div>
+            <!-- End of Main Content -->
+
+            <!-- Footer -->
+            <footer class="sticky-footer bg-white">
+                <div class="container my-auto">
+                    <div class="copyright text-center my-auto">
+                        <span>Copyright &copy; Tienda de Comidas 2026</span>
+                    </div>
+                </div>
+            </footer>
+
+        </div>
+        <!-- End of Content Wrapper -->
+
+    </div>
+    <!-- End of Page Wrapper -->
+
+    <!-- Scripts -->
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/4.6.2/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.min.js"></script>
+    <script src="js/sb-admin-2.min.js"></script>
+
+    <script>
+        // --- CONFIGURACIÓN ---
+        const API_BASE_URL = 'http://localhost:3000/api';
+
+        async function handleFetchResponse(response) {
+            if (!response.ok) {
+                const errorData = await response.json().catch(() => ({ message: 'Error del servidor' }));
+                throw new Error(errorData.message || `HTTP error! status: ${response.status}`);
+            }
+            return response.json();
+        }
+
+        function formatearMoneda(valor) {
+            return new Intl.NumberFormat('es-CO', {
+                style: 'currency',
+                currency: 'COP',
+                minimumFractionDigits: 0
+            }).format(valor);
+        }
+
+        document.addEventListener('DOMContentLoaded', async function() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const pedidoId = urlParams.get('id');
+
+            if (!pedidoId) {
+                alert('No se especificó un ID de pedido');
+                window.location.href = 'listado-pedidos.html';
+                return;
+            }
+
+            document.getElementById('pedido-id').textContent = `#${pedidoId}`;
+
+            async function cargarDetallePedido() {
+                try {
+                    // 1. Obtener datos del pedido
+                    const pedido = await handleFetchResponse(await fetch(`${API_BASE_URL}/pedidos/${pedidoId}`));
+                    
+                    // 2. Mostrar información del cliente
+                    document.getElementById('cliente-nombre').textContent = `${pedido.nombre} ${pedido.apellido}`;
+                    document.getElementById('cliente-email').textContent = pedido.email;
+                    
+                    // Obtener datos completos del cliente (para celular y dirección)
+                    const cliente = await handleFetchResponse(await fetch(`${API_BASE_URL}/clientes/${pedido.id_cliente}`));
+                    document.getElementById('cliente-celular').textContent = cliente.celular || 'No disponible';
+                    document.getElementById('cliente-direccion').textContent = cliente.direccion || 'No disponible';
+
+                    // 3. Mostrar información del pedido
+                    document.getElementById('pedido-fecha').textContent = new Date(pedido.fecha).toLocaleString('es-CO');
+                    document.getElementById('pedido-metodo-pago').textContent = pedido.metodo_pago;
+                    
+                    const estadoSpan = document.getElementById('pedido-estado');
+                    estadoSpan.textContent = pedido.estado;
+                    const badgeClass = {
+                        'pendiente': 'badge-warning',
+                        'procesando': 'badge-info',
+                        'completado': 'badge-success',
+                        'cancelado': 'badge-danger'
+                    }[pedido.estado] || 'badge-secondary';
+                    estadoSpan.className = `badge badge-pill ${badgeClass} p-2`;
+                    
+                    document.getElementById('pedido-descuento').textContent = formatearMoneda(pedido.descuento || 0);
+                    document.getElementById('pedido-aumento').textContent = formatearMoneda(pedido.aumento || 0);
+
+                    // 4. Cargar productos del detalle
+                    const detalles = await handleFetchResponse(await fetch(`${API_BASE_URL}/detalle-pedido?id_pedido=${pedidoId}`));
+                    
+                    const tbody = document.getElementById('detalle-productos');
+                    tbody.innerHTML = '';
+
+                    let subtotal = 0;
+
+                    detalles.forEach(detalle => {
+                        const fila = document.createElement('tr');
+                        const subtotalItem = detalle.precio * detalle.cantidad;
+                        subtotal += subtotalItem;
+
+                        fila.innerHTML = `
+                            <td>
+                                <img src="${detalle.imagen || 'https://via.placeholder.com/60'}" 
+                                     alt="${detalle.producto_nombre}" 
+                                     class="product-image">
+                            </td>
+                            <td>${detalle.producto_nombre}</td>
+                            <td>${formatearMoneda(detalle.precio)}</td>
+                            <td>${detalle.cantidad}</td>
+                            <td>${formatearMoneda(subtotalItem)}</td>
+                        `;
+                        tbody.appendChild(fila);
+                    });
+
+                    // 5. Actualizar resumen
+                    const total = subtotal + (pedido.aumento || 0) - (pedido.descuento || 0);
+                    
+                    document.getElementById('resumen-subtotal').textContent = formatearMoneda(subtotal);
+                    document.getElementById('resumen-descuento').textContent = formatearMoneda(pedido.descuento || 0);
+                    document.getElementById('resumen-aumento').textContent = formatearMoneda(pedido.aumento || 0);
+                    document.getElementById('resumen-total').textContent = formatearMoneda(total);
+
+                } catch (error) {
+                    console.error('Error cargando detalle:', error);
+                    alert('Error al cargar el detalle del pedido: ' + error.message);
+                }
+            }
+
+            // Botón para cambiar estado
+            document.getElementById('btn-cambiar-estado').addEventListener('click', async function() {
+                const estados = ['pendiente', 'procesando', 'completado', 'cancelado'];
+                const estadoActual = document.getElementById('pedido-estado').textContent;
+                
+                const nuevoEstado = prompt(
+                    `Cambiar estado del pedido #${pedidoId}\nEstados disponibles: ${estados.join(', ')}\n\nEstado actual: ${estadoActual}\n\nNuevo estado:`,
+                    estadoActual
+                );
+
+                if (nuevoEstado && estados.includes(nuevoEstado)) {
+                    try {
+                        const response = await fetch(`${API_BASE_URL}/pedidos/${pedidoId}/estado`, {
+                            method: 'PATCH',
+                            headers: { 'Content-Type': 'application/json' },
+                            body: JSON.stringify({ estado: nuevoEstado })
+                        });
+                        await handleFetchResponse(response);
+                        alert('✅ Estado actualizado correctamente');
+                        await cargarDetallePedido(); // Recargar datos
+                    } catch (error) {
+                        alert('❌ Error al cambiar estado: ' + error.message);
+                    }
+                } else if (nuevoEstado) {
+                    alert('❌ Estado no válido');
+                }
+            });
+
+            // Cargar datos
+            await cargarDetallePedido();
+        });
+    </script>
+
+</body>
+
+</html>

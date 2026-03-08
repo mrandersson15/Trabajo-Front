@@ -1,0 +1,545 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Admin - Crear Producto</title>
+
+    <!-- Custom fonts for this template-->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet" type="text/css">
+    <link
+        href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
+        rel="stylesheet">
+
+    <!-- Custom styles for this template-->
+    <link href="css/sb-admin-2.min.css" rel="stylesheet">
+
+    <style>
+        .preview-image {
+            max-width: 100%;
+            max-height: 300px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            object-fit: cover;
+        }
+    </style>
+</head>
+
+<body id="page-top">
+
+    <!-- Page Wrapper -->
+    <div id="wrapper">
+
+        <!-- Sidebar -->
+        <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
+
+            <!-- Sidebar - Brand -->
+            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
+                <div class="sidebar-brand-icon rotate-n-15">
+                    <i class="fas fa-laugh-wink"></i>
+                </div>
+                <div class="sidebar-brand-text mx-3">Inventario</div>
+            </a>
+
+            <!-- Divider -->
+            <hr class="sidebar-divider my-0">
+
+            <!-- Nav Item - Dashboard -->
+            <li class="nav-item">
+                <a class="nav-link" href="index.html">
+                    <i class="fas fa-fw fa-tachometer-alt"></i>
+                    <span>Dashboard</span>
+                </a>
+            </li>
+
+            <!-- Divider -->
+            <hr class="sidebar-divider">
+
+            <!-- Heading -->
+            <div class="sidebar-heading">
+                Módulos
+            </div>
+
+            <!-- Nav Item - Productos -->
+            <li class="nav-item active">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseProductos"
+                    aria-expanded="true" aria-controls="collapseProductos">
+                    <i class="fas fa-fw fa-box"></i>
+                    <span>Productos</span>
+                </a>
+                <div id="collapseProductos" class="collapse show" aria-labelledby="headingProductos" data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <h6 class="collapse-header">Acciones:</h6>
+                        <a class="collapse-item" href="listado-pro.html">Ver Productos</a>
+                        <a class="collapse-item active" href="crear-pro.html">Crear Productos</a>
+                    </div>
+                </div>
+            </li>
+
+            <!-- Nav Item - Clientes -->
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseClientes"
+                    aria-expanded="false" aria-controls="collapseClientes">
+                    <i class="fas fa-fw fa-users"></i>
+                    <span>Clientes</span>
+                </a>
+                <div id="collapseClientes" class="collapse" aria-labelledby="headingClientes" data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <h6 class="collapse-header">Acciones:</h6>
+                        <a class="collapse-item" href="listado-clientes.html">Ver Clientes</a>
+                        <a class="collapse-item" href="crear-cliente.html">Crear Clientes</a>
+                    </div>
+                </div>
+            </li>
+
+            <!-- Nav Item - Pedidos -->
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePedidos"
+                    aria-expanded="false" aria-controls="collapsePedidos">
+                    <i class="fas fa-fw fa-shopping-cart"></i>
+                    <span>Pedidos</span>
+                </a>
+                <div id="collapsePedidos" class="collapse" aria-labelledby="headingPedidos" data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <h6 class="collapse-header">Acciones:</h6>
+                        <a class="collapse-item" href="listado-pedidos.html">Ver Pedidos</a>
+                        <a class="collapse-item" href="crear-pedido.html">Crear Pedidos</a>
+                    </div>
+                </div>
+            </li>
+
+            <!-- Nav Item - Usuarios -->
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUsuarios"
+                    aria-expanded="false" aria-controls="collapseUsuarios">
+                    <i class="fas fa-fw fa-user-tie"></i>
+                    <span>Usuarios</span>
+                </a>
+                <div id="collapseUsuarios" class="collapse" aria-labelledby="headingUsuarios" data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <h6 class="collapse-header">Acciones:</h6>
+                        <a class="collapse-item" href="listado-usuarios.html">Ver Usuarios</a>
+                        <a class="collapse-item" href="crear-usuario.html">Crear Usuarios</a>
+                    </div>
+                </div>
+            </li>
+
+            <!-- Divider -->
+            <hr class="sidebar-divider">
+
+            <!-- Sidebar Toggler (Sidebar) -->
+            <div class="text-center d-none d-md-inline">
+                <button class="rounded-circle border-0" id="sidebarToggle"></button>
+            </div>
+
+        </ul>
+        <!-- End of Sidebar -->
+
+        <!-- Content Wrapper -->
+        <div id="content-wrapper" class="d-flex flex-column">
+
+            <!-- Main Content -->
+            <div id="content">
+
+                <!-- Topbar -->
+                <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
+
+                    <!-- Sidebar Toggle (Topbar) -->
+                    <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
+                        <i class="fa fa-bars"></i>
+                    </button>
+
+                    <!-- Topbar Search -->
+                    <form class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
+                        <div class="input-group">
+                            <input type="text" class="form-control bg-light border-0 small" placeholder="Buscar..."
+                                aria-label="Search" aria-describedby="basic-addon2">
+                            <div class="input-group-append">
+                                <button class="btn btn-primary" type="button">
+                                    <i class="fas fa-search fa-sm"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+
+                    <!-- Topbar Navbar -->
+                    <ul class="navbar-nav ml-auto">
+
+                        <!-- Nav Item - User Information -->
+                        <li class="nav-item dropdown no-arrow">
+                            <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
+                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <span class="mr-2 d-none d-lg-inline text-gray-600 small">Admin</span>
+                                <img class="img-profile rounded-circle" src="img/undraw_profile.svg">
+                            </a>
+                        </li>
+
+                    </ul>
+
+                </nav>
+                <!-- End of Topbar -->
+
+                <!-- Begin Page Content -->
+                <div class="container-fluid">
+
+                    <!-- Page Heading -->
+                    <div class="d-sm-flex align-items-center justify-content-between mb-4">
+                        <h1 class="h3 mb-0 text-gray-800">Crear Nuevo Producto</h1>
+                        <a href="listado-pro.html" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm">
+                            <i class="fas fa-list fa-sm text-white-50"></i> Ver Listado
+                        </a>
+                    </div>
+
+                    <!-- Content Row -->
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <form id="formulario-producto">
+                                <!-- Selector rápido de productos predefinidos (opcional) -->
+                                <div class="form-group">
+                                    <label for="productos-select">Productos Rápidos (opcional)</label>
+                                    <select id="productos-select" class="form-control">
+                                        <option value="">Seleccionar un producto predefinido</option>
+                                        <option value="Hamburguesa">Hamburguesa</option>
+                                        <option value="Picada">Picada</option>
+                                        <option value="Pasta">Pasta</option>
+                                        <option value="Perro">Perro</option>
+                                        <option value="Sanchipapa">Sanchipapa</option>
+                                        <option value="Chuzo">Chuzo</option>
+                                        <option value="Pizza">Pizza</option>
+                                        <option value="Pollo">Pollo</option>
+                                        <option value="Tacos">Tacos</option>
+                                        <option value="Burrito">Burrito</option>
+                                    </select>
+                                    <small class="form-text text-muted">Selecciona para autocompletar los campos</small>
+                                </div>
+
+                                <!-- Nombre input -->
+                                <div class="form-group">
+                                    <label for="nombre-pro">Nombre del Producto *</label>
+                                    <input type="text" id="nombre-pro" class="form-control" placeholder="Ej: Hamburguesa Especial" required />
+                                </div>
+
+                                <!-- Precio input -->
+                                <div class="form-group">
+                                    <label for="precio-pro">Precio *</label>
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text">$</span>
+                                        </div>
+                                        <input type="number" id="precio-pro" class="form-control" step="100" min="0" placeholder="0" required />
+                                    </div>
+                                </div>
+
+                                <!-- Stock input -->
+                                <div class="form-group">
+                                    <label for="stock-pro">Stock *</label>
+                                    <input type="number" id="stock-pro" class="form-control" min="0" placeholder="0" required />
+                                </div>
+
+                                <!-- Descripción textarea -->
+                                <div class="form-group">
+                                    <label for="descripcion-pro">Descripción</label>
+                                    <textarea class="form-control" id="descripcion-pro" rows="4" placeholder="Descripción del producto..."></textarea>
+                                </div>
+
+                                <!-- URL de Imagen input -->
+                                <div class="form-group">
+                                    <label for="imagen-pro-url">URL de la Imagen</label>
+                                    <input type="url" id="imagen-pro-url" class="form-control" placeholder="https://ejemplo.com/imagen.jpg" />
+                                    <small class="form-text text-muted">Deja en blanco para usar la imagen del producto seleccionado</small>
+                                </div>
+
+                                <!-- Submit button (AHORA ES TYPE="submit") -->
+                                <button type="submit" class="btn btn-primary btn-block mb-4">
+                                    <i class="fas fa-save"></i> Crear Producto
+                                </button>
+                            </form>
+                        </div>
+                        <div class="col-lg-5 offset-lg-1">
+                            <div class="text-center">
+                                <h5>Vista Previa</h5>
+                                <img id="imagen-pro" src="https://via.placeholder.com/400x300?text=Vista+Previa" 
+                                     class="preview-image img-fluid" alt="Vista previa del producto">
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <!-- /.container-fluid -->
+
+            </div>
+            <!-- End of Main Content -->
+
+            <!-- Footer -->
+            <footer class="sticky-footer bg-white">
+                <div class="container my-auto">
+                    <div class="copyright text-center my-auto">
+                        <span>Copyright &copy; Tienda de Comidas 2026</span>
+                    </div>
+                </div>
+            </footer>
+            <!-- End of Footer -->
+
+        </div>
+        <!-- End of Content Wrapper -->
+
+    </div>
+    <!-- End of Page Wrapper -->
+
+    <!-- Scroll to Top Button-->
+    <a class="scroll-to-top rounded" href="#page-top">
+        <i class="fas fa-angle-up"></i>
+    </a>
+
+    <!-- Bootstrap core JavaScript-->
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/4.6.2/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Core plugin JavaScript-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.min.js"></script>
+
+    <!-- Custom scripts for all pages-->
+    <script src="js/sb-admin-2.min.js"></script>
+
+    <script>
+        // --- CONFIGURACIÓN ---
+        const API_BASE_URL = 'http://localhost:3000/api';
+
+        // --- FUNCIÓN AUXILIAR PARA MANEJAR RESPUESTAS ---
+        async function handleFetchResponse(response) {
+            if (!response.ok) {
+                const errorData = await response.json().catch(() => ({ message: 'Error del servidor' }));
+                throw new Error(errorData.message || `HTTP error! status: ${response.status}`);
+            }
+            return response.json();
+        }
+
+        // --- BASE DE DATOS DE IMÁGENES DE EJEMPLO ---
+        const imagenes = [
+            {
+                name: "Hamburguesa",
+                precio: 30000,
+                url: "https://th.bing.com/th/id/R.c691ed37c9ce3040c3ebd2892e88870c?rik=QUBcFflN%2b9oqPQ&pid=ImgRaw&r=0"
+            },
+            {
+                name: "Pizza",
+                precio: 45000,
+                url: "https://www.ocu.org/-/media/ocu/images/home/alimentacion/alimentos/pizzas_selector_1600x900.jpg?rev=6a81e278-07fc-4e95-9ba1-361063f35adf&hash=B8B1264AB6FC3F4B1AE140EB390208CD"
+            },
+            {
+                name: "Pasta",
+                precio: 25000,
+                url: "https://cdn.shopify.com/s/files/1/2538/5286/products/Spaghetti-with-Meat-Sauce-Recipe-1-1200_787x787.jpg?v=1588772697"
+            },
+            {
+                name: "Perro",
+                precio: 22000,
+                url: "https://th.bing.com/th/id/OIP.2QjcuwsTimAImo8WSQdTdAHaFp?rs=1&pid=ImgDetMain"
+            },
+            {
+                name: "Burrito",
+                precio: 25000,
+                url: "https://th.bing.com/th/id/R.1a7d6f0af7be590eb4e27d96ce3530e5?rik=eiCcb%2f%2b9TYNzXQ&pid=ImgRaw&r=0"
+            },
+            {
+                name: "Tacos",
+                precio: 26000,
+                url: "https://th.bing.com/th/id/R.d50b293e5d2de51d349691db78f71f8c?rik=FfttXcgxjuqR%2fQ&pid=ImgRaw&r=0"
+            },
+            {
+                name: "Pollo",
+                precio: 35000,
+                url: "https://th.bing.com/th/id/OIP.IAza-1yPPvzA55qlI0VqvQHaF7?w=744&h=595&rs=1&pid=ImgDetMain"
+            },
+            {
+                name: "Chuzo",
+                precio: 22000,
+                url: "https://th.bing.com/th/id/R.c0d3de5bd13edcc5323d074e4ba8f864?rik=lFbTsZF0ESAN5w&pid=ImgRaw&r=0"
+            },
+            {
+                name: "Sanchipapa",
+                precio: 20000,
+                url: "https://1.bp.blogspot.com/-6lKIIVq3CXw/WK8raCAD-gI/AAAAAAABMnI/5VoCplTPogASfSZS5XzIFZizMBZ8yO8bQCLcB/s1600/salchipapa%2Bcolombiana.png"
+            },
+            {
+                name: "Picada",
+                precio: 65000,
+                url: "https://cdn.colombia.com/gastronomia/2016/06/21/picada-colombiana-2990.jpg"
+            }
+        ];
+
+        document.addEventListener('DOMContentLoaded', function() {
+            // --- REFERENCIAS A ELEMENTOS DEL DOM ---
+            const selectImagen = document.querySelector('#productos-select');
+            const imagenMostrada = document.querySelector('#imagen-pro');
+            const nombreInput = document.querySelector('#nombre-pro');
+            const precioInput = document.querySelector('#precio-pro');
+            const stockInput = document.querySelector('#stock-pro');
+            const descripcionInput = document.querySelector('#descripcion-pro');
+            const imagenUrlInput = document.querySelector('#imagen-pro-url');
+            const formulario = document.querySelector('#formulario-producto');
+
+            // --- FUNCIÓN PARA ACTUALIZAR LA VISTA PREVIA ---
+            function actualizarVistaPrevia(url) {
+                if (url && url.trim() !== '') {
+                    imagenMostrada.src = url;
+                } else {
+                    imagenMostrada.src = 'https://via.placeholder.com/400x300?text=Vista+Previa';
+                }
+            }
+
+            // --- EVENTO PARA SELECCIÓN RÁPIDA DE PRODUCTOS ---
+            if (selectImagen) {
+                selectImagen.addEventListener('change', function() {
+                    const nombreSeleccionado = this.value;
+                    
+                    if (nombreSeleccionado) {
+                        // Buscar la imagen seleccionada en el array
+                        const imagenSeleccionada = imagenes.find(img => img.name === nombreSeleccionado);
+                        
+                        if (imagenSeleccionada) {
+                            // Autocompletar campos
+                            nombreInput.value = imagenSeleccionada.name;
+                            precioInput.value = imagenSeleccionada.precio;
+                            imagenMostrada.src = imagenSeleccionada.url;
+                            
+                            // También actualizar el campo de URL si existe
+                            if (imagenUrlInput) {
+                                imagenUrlInput.value = imagenSeleccionada.url;
+                            }
+                            
+                            // Opcional: sugerir una descripción
+                            if (descripcionInput && !descripcionInput.value) {
+                                descripcionInput.value = `${imagenSeleccionada.name} deliciosa preparada con los mejores ingredientes.`;
+                            }
+                        }
+                    }
+                });
+            }
+
+            // --- EVENTO PARA ACTUALIZAR VISTA PREVIA CUANDO CAMBIA LA URL ---
+            if (imagenUrlInput) {
+                imagenUrlInput.addEventListener('input', function() {
+                    actualizarVistaPrevia(this.value);
+                });
+            }
+
+            // --- EVENTO PARA ACTUALIZAR VISTA PREVIA CUANDO CAMBIA EL SELECT (por si acaso) ---
+            if (selectImagen) {
+                selectImagen.addEventListener('change', function() {
+                    const nombreSeleccionado = this.value;
+                    const imagenSeleccionada = imagenes.find(img => img.name === nombreSeleccionado);
+                    
+                    if (imagenSeleccionada && !imagenUrlInput.value) {
+                        // Solo actualizar la vista previa con la imagen seleccionada
+                        // si el campo de URL personalizada está vacío
+                        imagenMostrada.src = imagenSeleccionada.url;
+                    }
+                });
+            }
+
+            // --- ENVÍO DEL FORMULARIO (AHORA SÍ FUNCIONA) ---
+            if (formulario) {
+                formulario.addEventListener('submit', async function(event) {
+                    // ¡IMPORTANTE! Prevenir el envío tradicional del formulario
+                    event.preventDefault();
+
+                    // Validar campos obligatorios
+                    const nombre = nombreInput.value.trim();
+                    const precio = parseFloat(precioInput.value);
+                    const stock = parseInt(stockInput.value);
+
+                    if (!nombre) {
+                        alert('❌ El nombre del producto es obligatorio');
+                        nombreInput.focus();
+                        return;
+                    }
+
+                    if (isNaN(precio) || precio <= 0) {
+                        alert('❌ El precio debe ser un número mayor a 0');
+                        precioInput.focus();
+                        return;
+                    }
+
+                    if (isNaN(stock) || stock < 0) {
+                        alert('❌ El stock debe ser un número válido');
+                        stockInput.focus();
+                        return;
+                    }
+
+                    // Determinar la URL de la imagen (prioridad: campo URL > imagen actual)
+                    let imagenUrl = imagenUrlInput.value.trim();
+                    if (!imagenUrl) {
+                        // Si no hay URL personalizada, usar la imagen actual si no es la de placeholder
+                        if (imagenMostrada.src && !imagenMostrada.src.includes('placeholder')) {
+                            imagenUrl = imagenMostrada.src;
+                        } else {
+                            imagenUrl = ''; // Enviar vacío para que use el default del backend
+                        }
+                    }
+
+                    // Crear objeto del producto
+                    const nuevoProducto = {
+                        nombre: nombre,
+                        descripcion: descripcionInput.value.trim() || '',
+                        precio: precio,
+                        stock: stock,
+                        imagen: imagenUrl
+                    };
+
+                    console.log('📤 Enviando producto:', nuevoProducto);
+
+                    // Deshabilitar el botón mientras se procesa
+                    const submitButton = formulario.querySelector('button[type="submit"]');
+                    const textoOriginal = submitButton.innerHTML;
+                    submitButton.disabled = true;
+                    submitButton.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Creando...';
+
+                    try {
+                        // Enviar petición a la API
+                        const response = await fetch(`${API_BASE_URL}/productos`, {
+                            method: 'POST',
+                            headers: { 
+                                'Content-Type': 'application/json'
+                            },
+                            body: JSON.stringify(nuevoProducto)
+                        });
+
+                        const resultado = await handleFetchResponse(response);
+                        
+                        console.log('✅ Respuesta del servidor:', resultado);
+                        alert('✅ Producto creado con éxito! ID: ' + resultado.id);
+                        
+                        // Preguntar si quiere ir al listado o crear otro
+                        if (confirm('¿Quieres ir al listado de productos?')) {
+                            window.location.href = 'listado-pro.html';
+                        } else {
+                            // Limpiar formulario para crear otro
+                            formulario.reset();
+                            actualizarVistaPrevia('');
+                            if (selectImagen) selectImagen.value = '';
+                        }
+
+                    } catch (error) {
+                        console.error('❌ Error:', error);
+                        alert('❌ Error al crear producto: ' + error.message);
+                    } finally {
+                        // Restaurar botón
+                        submitButton.disabled = false;
+                        submitButton.innerHTML = textoOriginal;
+                    }
+                });
+            } else {
+                console.error('No se encontró el formulario');
+            }
+        });
+    </script>
+
+</body>
+
+</html>

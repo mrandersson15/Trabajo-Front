@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Admin - Editar Usuario</title>
+
+    <!-- Custom fonts for this template-->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet" type="text/css">
+    <link
+        href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
+        rel="stylesheet">
+
+    <!-- Custom styles for this template-->
+    <link href="css/sb-admin-2.min.css" rel="stylesheet">
+</head>
+
+<body id="page-top">
+
+    <!-- Page Wrapper -->
+    <div id="wrapper">
+
+        <!-- Sidebar (igual que en crear-usuario.html) -->
+        <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
+            <!-- ... tu sidebar existente ... -->
+            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
+                <div class="sidebar-brand-icon rotate-n-15">
+                    <i class="fas fa-laugh-wink"></i>
+                </div>
+                <div class="sidebar-brand-text mx-3">Tienda</div>
+            </a>
+            <!-- ... resto del sidebar ... -->
+        </ul>
+        <!-- End of Sidebar -->
+
+        <!-- Content Wrapper -->
+        <div id="content-wrapper" class="d-flex flex-column">
+
+            <!-- Main Content -->
+            <div id="content">
+
+                <!-- Topbar (igual que en crear-usuario.html) -->
+                <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
+                    <!-- ... tu topbar existente ... -->
+                </nav>
+                <!-- End of Topbar -->
+
+                <!-- Begin Page Content -->
+                <div class="container-fluid">
+
+                    <!-- Page Heading -->
+                    <div class="d-sm-flex align-items-center justify-content-between mb-4">
+                        <h1 class="h3 mb-0 text-gray-800">Editar Usuario</h1>
+                        <a href="listado-usuarios.html" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm">
+                            <i class="fas fa-list fa-sm text-white-50"></i> Volver al Listado
+                        </a>
+                    </div>
+
+                    <!-- Content Row -->
+                    <div class="row">
+                        <div class="col-lg-8">
+                            <form id="formulario-usuario">
+                          
+                                <!-- Rol select -->
+                                <div class="form-group">
+                                    <label for="rol">Rol *</label>
+                                    <select id="rol" class="form-control" required>
+                                        <option value="">Seleccionar Rol</option>
+                                        <option value="administrador">Administrador</option>
+                                        <option value="vendedor">Vendedor</option>
+                                        <option value="cajero">Cajero</option>
+                                    </select>
+                                </div>
+
+                                <!-- Usuario input -->
+                                <div class="form-group">
+                                    <label for="usuario">Nombre de Usuario *</label>
+                                    <input type="text" id="usuario" class="form-control" required />
+                                </div>
+    
+                                <!-- Contraseña input (opcional en edición) -->
+                                <div class="form-group">
+                                    <label for="contrasena">Nueva Contraseña <small class="text-muted">(dejar en blanco para no cambiar)</small></label>
+                                    <input type="password" id="contrasena" class="form-control" />
+                                </div>
+
+                                <!-- Confirmar contraseña input -->
+                                <div class="form-group">
+                                    <label for="confirmar_contrasena">Confirmar Nueva Contraseña</label>
+                                    <input type="password" id="confirmar_contrasena" class="form-control" />
+                                </div>
+
+                                <div class="alert alert-info">
+                                    <small>Si no deseas cambiar la contraseña, deja los campos de contraseña en blanco.</small>
+                                </div>
+                            
+                                <!-- Submit button -->
+                                <button type="submit" class="btn btn-primary btn-block mb-4">Actualizar Usuario</button>
+                            </form>
+                        </div>
+                    </div>
+
+                </div>
+                <!-- /.container-fluid -->
+
+            </div>
+            <!-- End of Main Content -->
+
+            <!-- Footer -->
+            <footer class="sticky-footer bg-white">
+                <div class="container my-auto">
+                    <div class="copyright text-center my-auto">
+                        <span>Copyright &copy; Tienda de Comidas 2026</span>
+                    </div>
+                </div>
+            </footer>
+            <!-- End of Footer -->
+
+        </div>
+        <!-- End of Content Wrapper -->
+
+    </div>
+    <!-- End of Page Wrapper -->
+
+    <!-- Scroll to Top Button-->
+    <a class="scroll-to-top rounded" href="#page-top">
+        <i class="fas fa-angle-up"></i>
+    </a>
+
+    <!-- Bootstrap core JavaScript-->
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/4.6.2/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Core plugin JavaScript-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.min.js"></script>
+
+    <!-- Custom scripts for all pages-->
+    <script src="js/sb-admin-2.min.js"></script>
+
+    <script>
+        // --- CONFIGURACIÓN ---
+        const API_BASE_URL = 'http://localhost:3000/api';
+
+        async function handleFetchResponse(response) {
+            if (!response.ok) {
+                const errorData = await response.json().catch(() => ({ message: 'Error del servidor' }));
+                throw new Error(errorData.message || `HTTP error! status: ${response.status}`);
+            }
+            return response.json();
+        }
+
+        document.addEventListener('DOMContentLoaded', async function() {
+            const formulario = document.getElementById('formulario-usuario');
+            const urlParams = new URLSearchParams(window.location.search);
+            const usuarioId = urlParams.get('id');
+
+            const rolSelect = document.getElementById('rol');
+            const usuarioInput = document.getElementById('usuario');
+            const contrasenaInput = document.getElementById('contrasena');
+            const confirmarInput = document.getElementById('confirmar_contrasena');
+
+            if (!usuarioId) {
+                alert('No se especificó un ID de usuario');
+                window.location.href = 'listado-usuarios.html';
+                return;
+            }
+
+            // --- 1. CARGAR DATOS DEL USUARIO ---
+            try {
+                const response = await fetch(`${API_BASE_URL}/usuarios/${usuarioId}`);
+                const usuario = await handleFetchResponse(response);
+
+                // 2. RELLENAR EL FORMULARIO
+                usuarioInput.value = usuario.usuario || '';
+                rolSelect.value = usuario.rol || '';
+
+            } catch (error) {
+                console.error('Error al cargar usuario:', error);
+                alert('❌ Error al cargar los datos del usuario: ' + error.message);
+                setTimeout(() => {
+                    window.location.href = 'listado-usuarios.html';
+                }, 3000);
+                return;
+            }
+
+            // --- 3. ENVÍO DEL FORMULARIO ---
+            formulario.addEventListener('submit', async function(event) {
+                event.preventDefault();
+
+                // Validar contraseñas si se ingresaron
+                const contrasena = contrasenaInput.value;
+                const confirmar = confirmarInput.value;
+
+                if (contrasena || confirmar) {
+                    if (contrasena !== confirmar) {
+                        alert('❌ Las contraseñas no coinciden');
+                        return;
+                    }
+                    if (contrasena.length < 6) {
+                        alert('❌ La contraseña debe tener al menos 6 caracteres');
+                        return;
+                    }
+                }
+
+                // Construir objeto de actualización
+                const usuarioActualizado = {
+                    rol: rolSelect.value,
+                    usuario: usuarioInput.value
+                };
+
+                // Solo incluir contraseña si se proporcionó una nueva
+                if (contrasena) {
+                    usuarioActualizado.contrasena = contrasena;
+                }
+
+                try {
+                    const response = await fetch(`${API_BASE_URL}/usuarios/${usuarioId}`, {
+                        method: 'PUT',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify(usuarioActualizado)
+                    });
+                    
+                    await handleFetchResponse(response);
+                    alert('✅ Usuario actualizado con éxito');
+                    window.location.href = 'listado-usuarios.html';
+
+                } catch (error) {
+                    alert('❌ Error al actualizar: ' + error.message);
+                }
+            });
+        });
+    </script>
+
+</body>
+
+</html>
